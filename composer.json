@@ -1,0 +1,30 @@
+{
+  "name": "tburschka/phpseclibBridge",
+  "description": "Brigde to simplify usage of phpseclib",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "phpseclib",
+    "ssh",
+    "scp",
+    "sftp"
+  ],
+  "homepage": "https://github.com/tburschka/phpseclibBridge",
+  "require": {
+    "php": ">=5.3",
+    "phpseclib/phpseclib": "~0.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4"
+  },
+  "autoload": {
+    "psr-4": {
+      "phpseclibBridge\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "phpseclibBridge\\Tests\\": "tests/"
+    }
+  }
+}
