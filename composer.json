@@ -1,6 +1,6 @@
 {
-  "name": "tburschka/phpseclibBridge",
-  "description": "Brigde to simplify usage of phpseclib",
+  "name": "tburschka/phpseclib-bridge",
+  "description": "Bridge to simplify usage of phpseclib",
   "license": "MIT",
   "keywords": [
     "php",
@@ -9,7 +9,7 @@
     "scp",
     "sftp"
   ],
-  "homepage": "https://github.com/tburschka/phpseclibBridge",
+  "homepage": "https://github.com/tburschka/phpseclib-bridge",
   "require": {
     "php": ">=5.3",
     "phpseclib/phpseclib": "~0.3"
