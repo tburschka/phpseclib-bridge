@@ -2,6 +2,11 @@
 
 namespace phpseclibBridge;
 
+use phpseclib\Crypt\RSA;
+use phpseclib\Net\SCP;
+use phpseclib\Net\SFTP;
+use phpseclib\Net\SSH2;
+
 class Bridge
 {
     const AUTH_PASSWORD = 'password';
@@ -115,32 +120,32 @@ class Bridge
     }
 
     /**
-     * @return \Net_SSH2
+     * @return SSH2
      */
     public function ssh()
     {
         $port = isset($this->port) ? $this->port : self::DEFAULT_PORT;
         $timeout = isset($this->timeout) ? $this->timeout : self::DEFAULT_TIMEOUT;
-        return $this->auth($this->getConnector('\Net_SSH2', $this->hostname, $port, $timeout));
+        return $this->auth($this->getConnector('\\phpseclib\\Net\\SSH2', $this->hostname, $port, $timeout));
     }
 
     /**
-     * @return \Net_SCP
+     * @return SCP
      */
     public function scp()
     {
         $ssh = $this->ssh();
-        return new \Net_SCP($ssh);
+        return new SCP($ssh);
     }
 
     /**
-     * @return \Net_SFTP
+     * @return SFTP
      */
     public function sftp()
     {
         $port = isset($this->port) ? $this->port : self::DEFAULT_PORT;
         $timeout = isset($this->timeout) ? $this->timeout : self::DEFAULT_TIMEOUT;
-        return $this->auth($this->getConnector('\Net_SFTP', $this->hostname, $port, $timeout));
+        return $this->auth($this->getConnector('\\phpseclib\\Net\\SFTP', $this->hostname, $port, $timeout));
     }
 
     /**
@@ -148,7 +153,7 @@ class Bridge
      * @param string $hostname
      * @param integer $port
      * @param integer $timeout
-     * @return \Net_SSH2|\Net_SFTP
+     * @return SSH2|SFTP
      */
     protected function getConnector($className, $hostname, $port, $timeout)
     {
@@ -192,15 +197,15 @@ class Bridge
     }
 
     /**
-     * @param \Net_SSH2|\Net_SFTP $connector
-     * @return \Net_SSH2|\Net_SFTP
+     * @param SSH2|SFTP $connector
+     * @return SSH2|SFTP
      * @throws \Exception
      */
     protected function auth($connector)
     {
         switch ($this->auth) {
             case self::AUTH_KEYFILE:
-                $password = new \Crypt_RSA();
+                $password = new RSA();
                 if (!is_null($this->getPassword())) {
                     $password->setPassword($this->getPassword());
                 }

@@ -2,6 +2,9 @@
 
 namespace phpseclibBridge\Tests;
 
+use phpseclib\Net\SCP;
+use phpseclib\Net\SFTP;
+use phpseclib\Net\SSH2;
 use phpseclibBridge\Bridge;
 
 class BridgeTest extends \PHPUnit_Framework_TestCase
@@ -170,7 +173,7 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
     public function testAuth()
     {
         $username = 'user';
-        $mock = $this->getMockBuilder('\Net_SSH2')
+        $mock = $this->getMockBuilder('\\phpseclib\\Net\\SSH2')
             ->disableOriginalConstructor()
             ->getMock();
         $mock->expects($this->once())
@@ -191,7 +194,7 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
     {
         $username = 'user';
         $password = 'pass';
-        $mock = $this->getMockBuilder('\Net_SSH2')
+        $mock = $this->getMockBuilder('\\phpseclib\\Net\\SSH2')
             ->disableOriginalConstructor()
             ->getMock();
         $mock->expects($this->once())
@@ -217,7 +220,7 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
     public function testAuthWithKeyfile($file, $password)
     {
         $username = 'user';
-        $mock = $this->getMockBuilder('\Net_SSH2')
+        $mock = $this->getMockBuilder('\\phpseclib\\Net\\SSH2')
             ->disableOriginalConstructor()
             ->getMock();
         $mock->expects($this->once())
@@ -240,7 +243,7 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
 
     public function testAuthException()
     {
-        $mock = $this->getMockBuilder('\Net_SSH2')
+        $mock = $this->getMockBuilder('\\phpseclib\\Net\\SSH2')
             ->disableOriginalConstructor()
             ->getMock();
         $mock->expects($this->once())
@@ -282,7 +285,7 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
 
     public function testSsh()
     {
-        $mockSsh = $this->getMockBuilder('\Net_SSH2')
+        $mockSsh = $this->getMockBuilder('\\phpseclib\\Net\\SSH2')
             ->disableOriginalConstructor()
             ->getMock();
         $mockSsh->expects($this->once())
@@ -304,7 +307,7 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
 
     public function testScp()
     {
-        $mockSsh = $this->getMockBuilder('\Net_SSH')
+        $mockSsh = $this->getMockBuilder('\\phpseclib\\Net\\SSH2')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -318,12 +321,12 @@ class BridgeTest extends \PHPUnit_Framework_TestCase
         /* @var Bridge $mockBridge */
         $mockBridge->setAuth(Bridge::AUTH_PASSWORD);
         $mockBridge->setUsername('user');
-        $this->assertInstanceOf('\Net_SCP', $mockBridge->scp());
+        $this->assertInstanceOf('\\phpseclib\\Net\\SCP', $mockBridge->scp());
     }
 
     public function testSftp()
     {
-        $mockSftp = $this->getMockBuilder('\Net_SFTP')
+        $mockSftp = $this->getMockBuilder('\\phpseclib\\Net\\SFTP')
             ->disableOriginalConstructor()
             ->getMock();
         $mockSftp->expects($this->once())
